@@ -20,19 +20,19 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          cd notizen-app
+          cd notizen-app/notizen-app
           npm install
 
       - name: Build Project
         run: |
-          cd notizen-app 
+          cd notizen-app/notizen-app 
           npm run build
 
       - name: Upload artifact to enable deployment
         uses: actions/upload-artifact@v3
         with:
           name: poduction file
-          path: ./notizen-app/build
+          path: ./notizen-app/notizen-app/build
 
   # Deploy Job
   deploy:
@@ -45,10 +45,10 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: poduction file
-          path: ./notizen-app/build
+          path: ./notizen-app/notizen-app/build
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.NOTIZEN_APP_SECRET }} #this is the key of the access token
-          publish_dir: ./notizen-app/build
+          publish_dir: ./notizen-app/notizen-app/build
